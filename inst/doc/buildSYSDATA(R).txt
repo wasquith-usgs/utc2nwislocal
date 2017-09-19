@@ -1,0 +1,39 @@
+TZ <- read.table("NWIStzCodes.txt", header=TRUE, sep="|", na.strings="--", stringsAsFactors=FALSE)
+TZ$TZ_CD <- gsub("\\s+", "", TZ$TZ_CD)
+TZ$TZ_DST_CD <- gsub("\\s+", "", TZ$TZ_DST_CD)
+TZ2 <- data.frame(TZ_KEY       =c(TZ$TZ_CD,            TZ$TZ_DST_CD),
+                  TZ_NAME      =c(TZ$TZ_NM,            TZ$TZ_DST_NM),
+                  UTC_OFFSET_CD=c(TZ$TZ_UTC_OFFSET_TM, TZ$TZ_DST_UTC_OFFSET_TM),
+                  stringsAsFactors=FALSE)
+
+tmp <- strsplit(TZ2$UTC_OFFSET_CD, ":")
+hr  <- as.numeric(sapply(tmp, function(t) t[1]))
+min <- as.numeric(sapply(tmp, function(t) t[2]))
+secs <- 60*(hr*60 + min)
+TZ2$UTC_POSIX_OFFSET <- secs
+TZ2 <- TZ2[! is.na(TZ2$TZ_KEY),]
+
+TZ2 <- TZ2[order(TZ2$TZ_KEY),]
+
+TimeZone_Offset_seconds <- new.env()
+TimeZone_Names <- new.env()
+TimeZone_Offset <- new.env()
+for(key in TZ2$TZ_KEY) {
+  val <- TZ2$UTC_POSIX_OFFSET[TZ2$TZ_KEY == key]
+  # Newfoundland and New Zealand each have key repeats for the "savings time"
+  # the val[1] ensures only one.
+  assign(key, val[1], envir=TimeZone_Offset_seconds)
+  val <- TZ2$TZ_NAME[TZ2$TZ_KEY == key]
+  assign(key, val[1], envir=TimeZone_Names)
+  val <- TZ2$UTC_OFFSET_CD[TZ2$TZ_KEY == key]
+  assign(key, val[1], envir=TimeZone_Offset)
+}
+
+.NWIStzUTC <- new.env()
+assign("TimeZone_Offset_seconds", TimeZone_Offset_seconds, envir=.NWIStzUTC)
+assign("TimeZone_Names",          TimeZone_Names,          envir=.NWIStzUTC)
+assign("TimeZone_Offset",         TimeZone_Offset,         envir=.NWIStzUTC)
+
+save(.NWIStzUTC, file="sysdata.rda")
+
+

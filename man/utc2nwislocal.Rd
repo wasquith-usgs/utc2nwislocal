@@ -3,11 +3,11 @@
 \alias{utc2nwislocal}
 \title{ Convert UTC Date-Time to NWIS Local Date-Time }
 \description{
-Convert UTC \code{POSIXct} date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (see \bold{Note}). The time zones are tracked in a separate database slot than the UTC date-time. The justification for this function is that the time-zone codes are not standard to the \code{OlsonNames()}, which more-or-less are available in most installations of \R, but are an ANSI SQL/92 time-zone offset string. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the time zone in output.
+Convert UTC \code{POSIXct} date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (see \bold{Note}). The time zones are tracked in a separate database slot than the UTC date-time. The justification for this function is that the time-zone codes are not standard to the \code{OlsonNames()}, which more-or-less are available in most installations of \R, but the NWIS names are an ANSI SQL/92 time-zone offset string. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the time zone in output.
 
 For some data operations external to NWIS, it is useful to retain UTC convention for the core date-time information and convert to local time on character-string output. Further, NWIS also retains a date-accuracy code, which is actively used to truncate character-string output of date-time values. The \code{utc2nwislocal} function as a result relies on three separate parts, which are the first three arguments. The basis of this function is to add respectively UTC offsets (in seconds) to the UTC \code{POSIXct} date-time values and convert the results into character strings.
 
-\bold{Warning: The function for basic speed intent does not check that a UTC is assigned to the first argument.}
+\bold{Warning: The function for basic speed intents does not check that an UTC is assigned to the first argument \code{dt}.}
 
 The core operation of this function for the \eqn{i}th value is to add or subtract the number of seconds from the UTC:
 \preformatted{
@@ -24,8 +24,8 @@ utc2nwislocal(dt, tz, acy=NA, no.ending.ws=FALSE,
 }
 \arguments{
   \item{dt}{A vector of \code{POSIXct} or similar date-time stamp in UTC in which seconds can be subtracted or added in order to change the date-time stamp. Also \code{NA} values for \code{dt} are returned as \code{NA};}
-  \item{tz}{A vector of NWIS time-zone codes (such as \code{lev_tz_cd}) and \code{NA}s at which are assumed to be in UTC; thus it is the users responsibility to deliver UTC. This argument can be a factor, but internally, it is immediately flipped to a character representation. This argument can be of length one, which will then be repeated to the length of \code{dt} internally;}
-  \item{acy}{The NWIS date-time accuracy code (such as \code{lev_dt_acy_cd}), which in implementation here is optional.  This argument can be a factor, but internally, it is immediately flipped to a character representation. The \code{NA} values internally trigger \emph{to-the-second} accuracy condition (though NWIS does not explicitly recognize an \dQuote{s} condition \emph{per se} because that is the default resolution of the database) and the entire date-time stamp of whatever accuracy held in \code{dt} is returned with the UTC offset applied. This argument can be of length one, which will then be repeated to the length of \code{dt} internally;}
+  \item{tz}{A vector of NWIS time-zone codes (such as \code{lev_tz_cd}) and \code{NA}s at which are assumed to be in UTC; thus it is the users responsibility to deliver UTC. This argument can be a factor, but internally, it is immediately flipped to a character representation. This argument also can be of length one, which will then be repeated to the length of \code{dt} internally;}
+  \item{acy}{The NWIS date-time accuracy code (such as \code{lev_dt_acy_cd}), which in implementation here is optional. This argument can be a factor, but internally, it is immediately flipped to a character representation. The \code{NA} values internally trigger \emph{to-the-second} accuracy condition (though NWIS does not explicitly recognize an \dQuote{s}econd condition \emph{per se} because that is the default resolution of the database) and the entire date-time stamp of whatever accuracy held in \code{dt} is returned with the UTC offset applied. This argument also can be of length one, which will then be repeated to the length of \code{dt} internally;}
   \item{no.ending.ws}{A logical to strip trailing whitespace from the end of the converted values. This is provided as switch to superceed the results of the various default right-padding styles;}
   \item{addat}{A logical to trigger whether the \dQuote{at} character is inserted instead of a space between the date and time component;}
   \item{nosec}{A logical to override the \code{acy="s"} values by truncating the seconds out. This might be a more useful option that at first seen---consider that for vast majority of USGS datasets that seconds are simply \code{":00"} a consumer of this function might decide the truncate those to avoid unneeded character inflation in the returned string;}
@@ -34,11 +34,11 @@ utc2nwislocal(dt, tz, acy=NA, no.ending.ws=FALSE,
   \item{tzpad}{A logical controlling whether the time-zone stamp is right-padded to 5 characters.}
 }
 \value{
-A character vector of converted date and times from UTC to the time zones requested. The date-time stamp will be right-padded 16 or 19 characters wide, and the time-zone code is right-padded to 5 characters or not at all.
+A character vector of converted date and times from UTC to the time zones requested. The date-time stamp will be right-padded 16 or 19 characters wide, and the time-zone code is right-padded to 5 characters or not at all. This padding can be stripped by the \code{no.ending.ws} argument.
 }
 \note{
 A list of the time zone codes can be found at \url{https://help.waterdata.usgs.gov/} using \url{code/tz_query?fmt=html} and the date-time accuracy codes can be found at
-\url{code/water_level_dtacy_cd_query?fmt=html}. The conversion of time-zone code to UTC offset is made by tabular lookup. The \code{sysdata.rda} that comes with this package contains the \code{environment} \code{.NWIStzUTC}. Within this \code{environment} are three other environments titled \cr
+\url{code/water_level_dtacy_cd_query?fmt=html}. The conversion of time-zone code to UTC offset is made by tabular lookup. The \code{sysdata.rda} that comes with this package contains the \code{environment} named \code{.NWIStzUTC}. Within this \code{environment} are three other environments titled \cr
 \code{TimeZone_Names},\cr
 \code{TimeZone_Offset}, and \cr
 \code{TimeZone_Offset_seconds}.\cr
@@ -58,7 +58,7 @@ The \code{.NWIStzUTC} and these other three are not exported by the \pkg{utc2nwi
   NWIStzUTC:::.NWIStzUTC$TimeZone_Offset_seconds$IDLE
     #  43200
 }
-The code used the create the \code{sysdata.rda} is located in file \code{buildSYSDATA(R).txt}, which is located in the \code{inst/doc} subdirectory of this package's sources. NWIS appears to use a 5 character wide (max) time-zone code convention. It is important to state that the table-lookup herein is based on white space being stripped from time-zone code. All spaces are internally stripped from the \code{tz} before processing commences---the pad is possible to return through the \code{tzpad} argument.
+The code, which was used the create the \code{sysdata.rda}, is located in file \code{buildSYSDATA(R).txt} that is located in the \code{inst/doc} subdirectory of this package's sources. NWIS appears to use a 5 (five) character wide (max) time-zone code convention. It is important to state that the table-lookup herein is based on white space being stripped from time-zone code. All spaces are internally stripped from the \code{tz} before processing commences---the pad is possible to return through the \code{tzpad} argument.
 }
 \author{ W.H. Asquith}
 \examples{
@@ -83,7 +83,7 @@ utc2nwislocal(dt_va, tz="AESST", "Y")[1]
 utc2nwislocal(as.POSIXct("2011-03-14 15:30:00"), tz="MDT", "m", secpad=TRUE)
   # "2011-03-14 09:30    MDT"
 utc2nwislocal(as.POSIXct("2011-03-14 15:30:00"), tz="MDT", "m", secpad=FALSE)
-  # "2011-03-14 09:30  MDT"
+  # "2011-03-14 09:30 MDT"
 
 \dontrun{
 tzs <- c("AESST", "EST", "CDT", "PST")

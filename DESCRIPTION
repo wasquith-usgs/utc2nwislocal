@@ -1,8 +1,8 @@
 Package: utc2nwislocal
 Title: UTC Date-Times to NWIS Local Time-Zones via UTC Offsets
-Version: 1.1.1
+Version: 1.1.2
 Depends: R (>= 3.0.0)
-Date: 2017-09-19
+Date: 2018-07-18
 Author: William H. Asquith [aut, cre]
 Description: U.S. Geological Survey National Water Information System (NWIS) time-zone code
  tables that are not fully congruent with those available natively in most R installations.
@@ -14,5 +14,5 @@ Copyright: This software is in the public domain because it contains materials t
   originally came from the United States Geological Survey, an agency of the
   United States Department of Interior. For more information, see the official
   USGS copyright policy at
-  http://www.usgs.gov/visual-id/credit_usgs.html#copyright
+  https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits
 NeedsCompilation: no

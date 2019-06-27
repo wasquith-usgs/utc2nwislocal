@@ -1,1 +1,3 @@
 export(utc2nwislocal)
+export(nwislocal2utc_offset_seconds)
+export(nwislocal2utc_offset_hours)

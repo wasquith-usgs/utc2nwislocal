@@ -61,3 +61,27 @@ function(dt, tz, acy=NA, no.ending.ws=FALSE,
       return(str) })
 }
 
+"nwislocal2utc_offset_seconds" <- function(tz) {
+  off <- sapply(tz, function(t) { ss <- NULL
+          if(is.na(t)) return(0)
+	         try(ss <- get(t, .NWIStzUTC$TimeZone_Offset_seconds), silent=TRUE)
+          if(is.null(ss)) return(NA)
+          return(ss) })
+  names(off) <- NULL
+  return(off)
+}
+
+"nwislocal2utc_offset_hours" <- function(tz) {
+  off <- sapply(tz, function(t) { hrss <- NULL
+          if(is.na(t)) return("00:00")
+	         try(hrss <- get(t, .NWIStzUTC$TimeZone_Offset), silent=TRUE)
+          if(is.null(hrss)) return(NA)
+          return(hrss) })
+  names(off) <- NULL
+  off <- as.character(off)
+  off <- strsplit(off, ":")
+  sapply(1:length(off), function(t) { h <- as.numeric(off[[t]])
+                                      if(is.na(h[1])) return(NA)
+                                      h[1] + h[2]/60 })
+}
+

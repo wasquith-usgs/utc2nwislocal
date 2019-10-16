@@ -1,9 +1,9 @@
 \encoding{utf8}
 \name{nwislocal2utc_offset_hours}
-\alias{utc2nwislocal}
+\alias{nwislocal2utc_offset_hours}
 \title{ Convert a NWIS Local Time Zone to Offset in Hours from UTC }
 \description{
-Convert an NWIS time zone code to the offset in hours from UTC.
+Convert an U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) time zone code to the offset in hours from Coordinated Universal Time (UTC).
 }
 \usage{
 nwislocal2utc_offset_hours(tz)
@@ -15,6 +15,9 @@ nwislocal2utc_offset_hours(tz)
 The UTC offsets in hours. Any time zone that does not exist in the lookup table, is returned as an \code{NA}.
 }
 \author{ W.H. Asquith}
+\references{
+U.S. Geological Survey, 2019, USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed August 9, 2019, at https://doi.org/10.5066/F7P55KJN.
+}
 \seealso{\code{\link{utc2nwislocal}}}
 \examples{
 nwislocal2utc_offset_hours(c("PST","PDT","the author",NA,"CDT"))

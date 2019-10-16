@@ -1,7 +1,7 @@
 # utc2nwislocal---UTC Date-Times to NWIS Local Time-Zones using UTC Offsets
 <img src='inst/www/standard_time_zones_of_the_world.jpg' height='300' align="right" />
 
-#### Author:           William H. Asquith
+#### Author:           William H. Asquith, Rondald C. Seanor
 #### Point of contact: William H. Asquith (wasquith@usgs.gov)
 #### Year:             2019
 #### Digital Object Identifier (DOI):
@@ -10,13 +10,13 @@
 
 _Suggested Citation:_
 
-Asquith, W.H., 2019, utc2nwislocal---UTC date-times to NWIS local time-zones using UTC
-offsets: R package, U.S. Geological Survey software release,
+Asquith, W.H., and Seanor, R.C., 2019, utc2nwislocal---UTC date-times to NWIS local time-zones using UTC offsets: R package, U.S. Geological Survey software release,
 Reston, Va.,
 [https://code.usgs.gov/wasquith/utc2nwislocal]
 
 _Authors' ORCID nos.:_
-William H. Asquith, 0000-0002-7400-1861.
+William H. Asquith, 0000-0002-7400-1861;
+Ronald C. Seanor, 0000-0001-5735-5580.
 
 ***
 ***
@@ -77,7 +77,7 @@ The design of this package is to be compliant with the requirements of the _R_ C
   R CMD check --as-cran utc2nwislocal
   R CMD INSTALL utc2nwislocal
   R CMD Rd2pdf --force utc2nwislocal
-  R CMD check --as-cran --run-donttest MGBT; # A more rigorous checking
+  R CMD check --as-cran --run-donttest utc2nwislocal; # A more rigorous checking
 ```
 More details and background related to the **utc2nwislocal** package including its historical context, purpose, use, and demonstration of features are found within the user manual. In particular, the _R_ documentation file `man/utc2nwislocal.Rd` is the canonical starting point, and that starting point can be initiated after package installation through the following commands at the _R_ prompt:
 ```{r}

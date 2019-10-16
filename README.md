@@ -47,20 +47,14 @@ Two other interfaces are acquiring the hour and second offsets from UTC. The fir
 
 # PACKAGE INSTALLATION
 
-## Package Homepage (Installation from Source)
-
-To get release updates, use one of the following example commands, which requires the **remotes** package to be installed:
+**Temporary remote build for external but immediate colleagues.**
 
 ```{r}
-  library(remotes)
-  # Option 1
-  install_git("https://code.usgs.gov/wasquith/utc2nwislocal.git")
-
-  # Option 2
-  install_url("https://code.usgs.gov/wasquith/utc2nwislocal/-/archive/master/utc2nwislocal.zip")
+  library(devtools)
+  install_github("wasquith-usgs", "utc2nwislocal")
 ```
 
-## Additional Notes on Package Installation form Sources
+## Additional Notes on Package Installation From Sources
 
 Attention to which TAR (unzipping software) is used to unpack compressed files (inflate the repository) is needed for some Windows operating system users. For example, on some Windows machines with Esri ArcGIS software installed, the `tar.exe` distributed with ArcGIS will automatically run, but that `tar.exe` does not provide for zip inflation. The error message will look like this:
 ```{r}

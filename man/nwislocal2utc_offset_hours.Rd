@@ -3,7 +3,7 @@
 \alias{nwislocal2utc_offset_hours}
 \title{ Convert a NWIS Local Time Zone to Offset in Hours from UTC }
 \description{
-Convert an U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) time zone code to the offset in hours from Coordinated Universal Time (UTC).
+Convert an U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) time-zone code to the offset in hours from Coordinated Universal Time (UTC).
 }
 \usage{
 nwislocal2utc_offset_hours(tz)

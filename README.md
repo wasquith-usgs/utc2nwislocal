@@ -4,8 +4,9 @@
 #### Author:           William H. Asquith, Rondald C. Seanor
 #### Point of contact: William H. Asquith (wasquith@usgs.gov)
 #### Year:             2019
-#### Digital Object Identifier (DOI):
-#### USGS Information Product Data System (IPDS) no.:  (internal agency tracking)
+#### Digital Object Identifier (DOI): not yet started
+#### USGS Information Product Data System (IPDS) no.: note yet started (internal agency tracking)
+
 ***
 
 _Suggested Citation:_
@@ -23,9 +24,9 @@ Ronald C. Seanor, 0000-0001-5735-5580.
 
 # DESCRIPTION
 
-The **utc2nwislocal** package provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019). The time zones are tracked in a separate database slot than the UTC date-time.
+The **utc2nwislocal** package provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019). The time zones are tracked in a separate database slot than the UTC date-time. Sometimes it can be difficult to force the _R_ language to work with time zones in ways that some developers might desire. This package can help users working with NWIS data sets.
 
-The justification for this package is that the time-zone codes are not standard to the `base::OlsonNames()` within base _R_, but the NWIS names are an ANSI SQL/92 time-zone offset string. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the time zone in output.
+The justification for this package is that the time-zone codes are not standard to the `base::OlsonNames()` within base _R_, but the NWIS names are an ANSI SQL/92 time-zone offset string. American National Standards Institute (ANSI) SQL/92 was the third revision of the Structured Query Language (SQL) database query language. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the users local or the USGS data collection site local time zone in output.
 
 The package resides on the link shown in the _Suggested Citation_. Please consult this README along with other files (`CONTRIBUTING.md`, `DISCLAIMER.md`, `LICENSE.md`).
 
@@ -37,17 +38,18 @@ One of the primary interfaces is the `utc2nwislocal()` function. In the followin
   # [1] "2016-07-14 08:30 PDT"
 ```
 
-United States Pacific Daylight Time (PDT) is -07:00 hours behind of GMT. Pacific Daylight Time (PDT) replaces Pacific Standard Time during summer when daylight savings comes into effect. Pacific Standard Time is a UTC -8:00 timezone offset which means Pacific Standard Time is -8:00 hours ahead of Coordinated Universal Time.
+United States Pacific Daylight Time (PDT) is -07:00 hours behind UTC. Pacific Daylight Time (PDT) replaces Pacific Standard Time during summer when daylight savings comes into effect. Pacific Standard Time is a UTC -8:00 timezone offset which means Pacific Standard Time is -8:00 hours ahead of UTC.
 
 Two other interfaces are acquiring the hour and second offsets from UTC. The first example is for Australia Eastern Standard Time that is +11:00 hours ahead of UTC. The second example is for United States Central Daylight Time (CDT) and Central Standard Time (CST) and shows that the functions are vectorized.
 ```{r}
   nwislocal2utc_offset_hours("AESST")          # 11:00 hours
   nwislocal2utc_offset_seconds(c("CDT","CST")) # -18000, -21600 seconds
+  nwislocal2utc_offset_seconds("Asquith")      # NA, There is no Asquith time zone.
 ```
 
 # PACKAGE INSTALLATION
 
-**Temporary remote build for external but immediate colleagues.**
+**Temporary remote (github.com) build for external but immediate colleagues.**
 
 ```{r}
   library(devtools)
@@ -61,7 +63,7 @@ Attention to which TAR (unzipping software) is used to unpack compressed files (
   C:\ArcGIS\gbin\tar.exe: Cannot use compressed or remote archives
   C:\ArcGIS\gbin\tar.exe: Error is not recoverable: exiting now
 ```
-The easiest fix is to specify use of the `TAR="internal"` built into _R_ through the `Sys.setenv(TAR="internal")` command as shown above.
+The easiest fix is to specify use of the `TAR="internal"` built into _R_ through the `Sys.setenv(TAR="internal")` command as shown and then repeat the remote package installation process.
 
 
 # FURTHER DETAILS
@@ -79,7 +81,7 @@ More details and background related to the **utc2nwislocal** package including i
   ?"utc2nwislocal"
 ```
 
-The most critical component of the package is the hidden _R_ environment `.NWIStzUTC` provided by the `./utc2nwislocal/R/sysdata.rda` file, which is creatable by the script `./utc2nwislocal/inst/doc/buildSYSDATA(R).txt`. (The script is given a `.txt` file extension to keep _R_ from complaining when the **utc2nwislocal** package is checked for CRAN compliance.)
+The most critical component of the package is the hidden _R_ environment `.NWIStzUTC` provided by the `./utc2nwislocal/R/sysdata.rda` file, which was created by the script `./utc2nwislocal/inst/doc/buildSYSDATA(R).txt`. (The script is given a `.txt` file extension to keep _R_ from complaining when the **utc2nwislocal** package is checked for CRAN compliance.)
 
 The `.NWIStzUTC` environment is not exported but forced access can be used if readers are very curious: `utc2nwislocal:::.NWIStzUTC` (triple colon). This environment contains three subordinate environments that are hash-tabled lookups of timezones and UTC offsets. Below are some examples for inspecting the contents.
 ```{r}

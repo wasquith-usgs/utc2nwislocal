@@ -3,7 +3,7 @@ Title: UTC Date-Times to NWIS Local Time-Zones using UTC Offsets
 Version: 0.9
 Depends: R (>= 3.0.0)
 Date: 2019-10-23
-Author: William H. Asquith [aut, cre]
+Author: William H. Asquith [aut, cre], Ronald C. Seanor [aut]
 Description: U.S. Geological Survey National Water Information System (NWIS) time-zone code
  tables that are not fully congruent with those available natively in most R installations.
  Conversion of POSIXct date-times in Coordinated Universal Time (UTC) to a character

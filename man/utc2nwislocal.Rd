@@ -9,7 +9,7 @@ The justification for this package is that the time-zone codes are not standard 
 
 For some data operations external to NWIS, it is useful to retain UTC convention for the core date-time information and convert to local time on character-string output. Further, NWIS also retains a date-accuracy code, which is actively used to truncate character-string output of date-time values. The \code{utc2nwislocal} function as a result relies on three separate parts that are the first three arguments. The basis of this function is to add respectively UTC offsets (in seconds) to the UTC \code{as.POSIXct} date-times and convert the results into character strings.
 
-\bold{Warning: The function for basic speed intents does not check that an UTC is assigned to the first argument \code{dt}.}
+\bold{Warning:} The function for purposes of execution speed does not check that an UTC is assigned to the first argument \code{dt}.
 
 The core operation of this function for the \eqn{i}th value is to add or subtract the number of seconds from the UTC:
 \preformatted{

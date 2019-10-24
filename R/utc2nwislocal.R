@@ -36,14 +36,14 @@ function(dt, tz, acy=NA, no.ending.ws=FALSE,
 
   sapply(1:length(dt), function(i) {
       if(is.na(dt[i])) return(NA)
-      off <- NULL
+      off <- NULL # reset for the try(), which traps unknown codes
       if(tzt[i] != "XXXXX") {
          try(off <- get(tz[i], envir=.NWIStzUTC$TimeZone_Offset_seconds), silent=TRUE)
          if(is.null(off)) stop("fatal: '", off, "' is an unrecognized NWIS TZ code")
       } else {
          off <- 0
       }
-      val <- dt[i] + off
+      val <- dt[i] + off # the addition of seconds to UTC \code{as.POSIXct} date-time
       if(     acy[i] == "Y") { frmt <- frmtY }
       else if(acy[i] == "M") { frmt <- frmtM }
       else if(acy[i] == "D") { frmt <- frmtD }
@@ -78,10 +78,8 @@ function(dt, tz, acy=NA, no.ending.ws=FALSE,
           if(is.null(hrss)) return(NA)
           return(hrss) })
   names(off) <- NULL
-  off <- as.character(off)
-  off <- strsplit(off, ":")
+  off <- strsplit(as.character(off), ":")
   sapply(1:length(off), function(t) { h <- as.numeric(off[[t]])
                                       if(is.na(h[1])) return(NA)
                                       h[1] + h[2]/60 })
 }
-

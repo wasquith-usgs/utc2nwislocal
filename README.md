@@ -13,7 +13,7 @@ _Suggested Citation:_
 
 Asquith, W.H., and Seanor, R.C., 2019, utc2nwislocal---UTC date-times to NWIS local time-zones using UTC offsets: R package, U.S. Geological Survey provisional software,
 Reston, Va.,
-[https://code.usgs.gov/water/PATH????/utc2nwislocal]
+[https://code.usgs.gov/water/utc2nwislocal]
 
 _Authors' ORCID nos.:_
 William H. Asquith, 0000-0002-7400-1861;

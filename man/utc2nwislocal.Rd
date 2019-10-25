@@ -3,7 +3,7 @@
 \alias{utc2nwislocal}
 \title{ Convert UTC Date-Time to NWIS Local Date-Time }
 \description{
-Convert Coordinated Universal Time (UTC) \code{base::as.POSIXct()} date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) (see \bold{Note}). The time zones are tracked in a separate database slot than the UTC date-time.
+Convert Coordinated Universal Time (UTC) \code{base::as.POSIXct()} date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the globe-encompassing time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) (see \bold{Note}). The time zones are tracked in a separate database slot than the UTC date-time.
 
 The justification for this package is that the time-zone codes are not standard to the \code{OlsonNames()} within base \R, but the NWIS names are an ANSI SQL/92 time-zone offset string. American National Standards Institute (ANSI) SQL/92 was the third revision of the Structured Query Language (SQL) database query language. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the users local or the USGS data collection site local time zone in output.
 
@@ -39,7 +39,7 @@ utc2nwislocal(dt, tz, acy=NA, no.ending.ws=FALSE,
 A character vector of converted date and times from UTC to the time zones requested. The date-time stamp will be right-padded 16 or 19 characters wide, and the time-zone code is right-padded to 5 characters or not at all. This padding can be stripped by the \code{no.ending.ws} argument.
 }
 \note{
-A list of the NWIS time-zone codes can be found at \href{https://help.waterdata.usgs.gov/code/tz_query?fmt=html}{NWIS Time Zones}  (accessed on October 22, 2019) and the date-time accuracy codes can be found at
+A list of the globe-encompassing NWIS time-zone codes can be found at \href{https://help.waterdata.usgs.gov/code/tz_query?fmt=html}{NWIS Time Zones}  (accessed on October 22, 2019) and the date-time accuracy codes can be found at
 \href{https://help.waterdata.usgs.gov/code/water_level_dtacy_cd_query?fmt=html}{NWIS Time Accuracy Codes} (accessed on October 22, 2019). The conversion of time-zone code to UTC offset is made by tabular lookup. The \code{sysdata.rda} that comes with this package contains the \code{environment} named \code{.NWIStzUTC}. Within this \code{environment} are three other environments titled \cr
 \code{TimeZone_Names},\cr
 \code{TimeZone_Offset}, and \cr

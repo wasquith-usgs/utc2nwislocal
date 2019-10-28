@@ -5,7 +5,7 @@
 \description{
 Convert Coordinated Universal Time (UTC) \code{base::as.POSIXct()} date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the globe-encompassing time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) (see \bold{Note}). The time zones are tracked in a separate database slot than the UTC date-time.
 
-The justification for this package is that the time-zone codes are not standard to the \code{OlsonNames()} within base \R, but the NWIS names are an ANSI SQL/92 time-zone offset string. American National Standards Institute (ANSI) SQL/92 was the third revision of the Structured Query Language (SQL) database query language. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the users local or the USGS data collection site local time zone in output.
+The justification for this package is that the time-zone codes are not standard to the function\cr \code{base::OlsonNames()} within base \R, but the NWIS names are an ANSI SQL/92 time-zone offset string. American National Standards Institute (ANSI) SQL/92 was the third revision of the Structured Query Language (SQL) database query language. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS or various data output methods (beyond the scope of this documentation) switches in output either to the user's local time zone or the USGS data collection site local time zone.
 
 For some data operations external to NWIS, it is useful to retain UTC convention for the core date-time information and convert to local time on character-string output. Further, NWIS also retains a date-accuracy code, which is actively used to truncate character-string output of date-time values. The \code{utc2nwislocal} function as a result relies on three separate parts that are the first three arguments. The basis of this function is to add respectively UTC offsets (in seconds) to the UTC \code{as.POSIXct} date-times and convert the results into character strings.
 
@@ -44,7 +44,7 @@ A list of the globe-encompassing NWIS time-zone codes can be found at \href{http
 \code{TimeZone_Names},\cr
 \code{TimeZone_Offset}, and \cr
 \code{TimeZone_Offset_seconds}.\cr
-The \code{.NWIStzUTC} and these other three are not exported by the \pkg{utc2nwislocal} package but they can be accessed through \dQuote{triple-colon insistance.} The following code shows access to these three tables:
+The \code{.NWIStzUTC} and these other three are not exported by the \pkg{utc2nwislocal} package but they can be accessed, by curious users, through \dQuote{triple-colon insistance.} The following code shows access to these three tables:
 \preformatted{
   ls(NWIStzUTC:::.NWIStzUTC) # See the three table names
     # "TimeZone_Names"   "TimeZone_Offset"   "TimeZone_Offset_seconds"

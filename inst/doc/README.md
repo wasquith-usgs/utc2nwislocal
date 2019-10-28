@@ -12,7 +12,7 @@ This folder to accompany the **utc2nwislocal** _R_ package contains the _R_ code
 
 The `NWIStzCodes.txt` file originally came from the `.xlsx` spreadsheet file of the same name that is also in this directory, and again in turn, the file was near verbatim derived from a tab-delimited file acquired from the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019) time zone table through **utc2nwislocal** package co-author Ronald C. Seanor as a USGS database administrator in July, 2017 (https://help.waterdata.usgs.gov/code/tz_query?fmt=html) [accessed October 22, 2019] (https://help.waterdata.usgs.gov/code/water_level_dtacy_cd_query?fmt=html) [accessed October 22, 2019].
 
-The primary modification by the author to create the `NWIStzCodes.txt` was the population of missing fields with the character string "--". The author reports challenges in one or more of the Coordinated Universal Time (UTC) offset fields for the Newfoundland time zones in which the spreadsheet mysteriously mudged "-NN:NN" fields into numbers and not strings. It is advised to import into a spreadsheet as text columns when updating the `./utc2nwislocal/R/sysdata.rda` file.
+The primary modification by the author to create the `NWIStzCodes.txt` was the population of missing fields with the character string "--". The author reports challenges in one or more of the Coordinated Universal Time (UTC) offset fields for the Newfoundland time zones in which the spreadsheet mysteriously mudged "-NN:NN" fields into numbers and not strings. It is advised to import into a spreadsheet that data as text columns when, if ever needed, updating the `./utc2nwislocal/R/sysdata.rda` file.
 
 # REFERENCES
 

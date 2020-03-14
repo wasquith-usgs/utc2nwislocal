@@ -1,28 +1,31 @@
-# utc2nwislocal---UTC Date-Times to NWIS Local Time-Zones using UTC Offsets
+# utc2nwislocal---UTC Date-Times to NWIS Local Time Zones using UTC Offsets
 <img src='inst/www/standard_time_zones_of_the_world.jpg' height='300' align="right" />
 
-#### Author:           William H. Asquith, Rondald C. Seanor
+#### Author:           William H. Asquith, Ronald C. Seanor
 #### Point of contact: William H. Asquith (wasquith@usgs.gov)
-#### Year:             2019
+#### Year:             2020
+#### Version:          1.0.0
+#### Digital Object Identifier (DOI): https://doi.org/10.5066/P9UMT1O2
+#### USGS Information Product Data System (IPDS) no.: IP-113254 (internal agency tracking)
 
 ***
 
 _Suggested Citation:_
 
-Asquith, W.H., and Seanor, R.C., 2019, utc2nwislocal---UTC date-times to NWIS local time-zones using UTC offsets: R package, U.S. Geological Survey provisional software,
-Reston, Va.,
+Asquith, W.H., and Seanor, R.C., 2020, utc2nwislocal---UTC date-times to NWIS local time zones using UTC offsets: R package, U.S. Geological Survey provisional software,
+Reston, Va., https://doi.org/10.5066/P9UMT1O2.
 [https://code.usgs.gov/water/utc2nwislocal]
 
-_Authors' ORCID nos.:_
-William H. Asquith, 0000-0002-7400-1861;
-Ronald C. Seanor, 0000-0001-5735-5580.
+_Authors' [ORCID](https://orcid.org) nos.:_
+William H. Asquith, [0000-0002-7400-1861](https://orcid.org/0000-0002-7400-1861);
+Ronald C. Seanor, [0000-0001-5735-5580](https://orcid.org/0000-0001-5735-5580).
 
 ***
 ***
 
 # DESCRIPTION
 
-The **utc2nwislocal** package in the _R_ language (R Development Core Team, 2019) provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019). The time zones are tracked in a separate database slot than the UTC date-time. Sometimes it can be difficult to force the _R_ language to work with time zones in ways that some developers might desire. This package can help users working with some NWIS data sets.
+The **utc2nwislocal** package in the _R_ language (R Development Core Team, 2020) provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) (U.S. Geological Survey, 2019). The time zones are tracked in a separate database slot than the UTC date-time. Sometimes it can be difficult to force the _R_ language to work with time zones in ways that some developers might desire. This package can help users working with some NWIS data sets.
 
 The justification for this package is that the time-zone codes are not standard to the `base::OlsonNames()` within base _R_, but the NWIS names are an ANSI SQL/92 time-zone offset string. American National Standards Institute (ANSI) SQL/92 was the third revision of the Structured Query Language (SQL) database query language. NWIS stores date-times exclusively in UTC, and certain data retrievals can be (purposefully) kept in UTC, though commonly NWIS switches to the users local or the USGS data collection site local time zone in output.
 
@@ -36,7 +39,7 @@ One of the primary interfaces is the `utc2nwislocal()` function. In the followin
   # [1] "2016-07-14 08:30 PDT"
 ```
 
-United States Pacific Daylight Time (PDT) is -07:00 hours behind UTC. Pacific Daylight Time (PDT) replaces Pacific Standard Time during summer when daylight savings comes into effect. Pacific Standard Time is a UTC -8:00 timezone offset which means Pacific Standard Time is -8:00 hours ahead of UTC.
+United States Pacific Daylight Time (PDT) is -07:00 hours behind UTC. Pacific Daylight Time (PDT) replaces Pacific Standard Time during summer when daylight savings comes into effect. Pacific Standard Time is a UTC -8:00 time-zone offset, which means that the Pacific Standard Time is -8:00 hours ahead of UTC.
 
 Two other interfaces are acquiring the hour and second offsets from UTC. The first example is for Australia Eastern Standard Time that is +11:00 hours ahead of UTC. The second example is for United States Central Daylight Time (CDT) and Central Standard Time (CST) and shows that the functions are vectorized.
 ```{r}
@@ -55,14 +58,16 @@ To get release updates, use one of the following example commands, which require
   install_git("https://code.usgs.gov/water/utc2nwislocal.git")
 
   # Option 2
-  install_url("https://code.usgs.gov/water/utc2nwislocal/-/archive/master/utc2nwislocal.zip")
+  library(remotes)
+install_url("https://code.usgs.gov/water/utc2nwislocal/-/archive/master/utc2nwislocal.zip")
 
   # Option 3
   # The next example appears to fail, further study is needed.
+  library(remotes)
   install_gitlab("utc2nwislocal", host="https://code.usgs.gov/water")
 ```
 
-## Additional Notes on Package Installation From Sources
+## Additional Notes on Package Installation from Sources
 
 Attention to which TAR (unzipping software) is used to unpack compressed files (inflate the repository) is needed for some Windows operating system users. For example, on some Windows machines with Esri ArcGIS software installed, the `tar.exe` distributed with ArcGIS will automatically run, but that `tar.exe` does not provide for zip inflation. The error message will look like this:
 ```{r}
@@ -70,6 +75,8 @@ Attention to which TAR (unzipping software) is used to unpack compressed files (
   C:\ArcGIS\gbin\tar.exe: Error is not recoverable: exiting now
 ```
 The easiest fix is to specify use of the `TAR="internal"` built into _R_ through the `Sys.setenv(TAR="internal")` command as shown and then repeat the remote package installation process.
+
+Testing indicates that downloading other compressed archives, such as `utc2nwislocal-v1.0.0.zip`, does not always work across platforms tested (MacOS and Windows platforms). General attention to the `.tar.gz` format is recommended. Additional guidance on installation from sources (Windows platforms) can be found in the [file](https://code.usgs.gov/water/utc2nwislocal/blob/master/inst/INSTALL_HELP.md) `./inst/INSTALL_HELP.md` as well as in the **FURTHER DETAILS** section below (non-Windows platforms).
 
 
 # FURTHER DETAILS
@@ -89,7 +96,7 @@ More details and background related to the **utc2nwislocal** package including i
 
 The most critical component of the package is the hidden _R_ environment `.NWIStzUTC` provided by the `./utc2nwislocal/R/sysdata.rda` file, which was created by the script `./utc2nwislocal/inst/doc/buildSYSDATA(R).txt`. (The script is given a `.txt` file extension to keep _R_ from complaining when the **utc2nwislocal** package is checked for CRAN compliance.)
 
-The `.NWIStzUTC` environment is not exported but forced access can be used if readers are very curious: `utc2nwislocal:::.NWIStzUTC` (triple colon). This environment contains three subordinate environments that are hash-tabled lookups of timezones and UTC offsets. Below are some examples for inspecting, by the `ls()` function, the table contents:
+The `.NWIStzUTC` environment is not exported but forced access can be used if readers are very curious: `utc2nwislocal:::.NWIStzUTC` (triple colon). This environment contains three subordinate environments that are hash-tabled lookups of time zones and their corresponding UTC offsets. Below are some examples for inspecting, by the `ls()` function, the table contents:
 ```{r}
   ls(utc2nwislocal:::.NWIStzUTC) # results shown below
   # [1] "TimeZone_Names"     "TimeZone_Offset"     "TimeZone_Offset_seconds"
@@ -112,8 +119,8 @@ The following sections describe directories and most files found at the top-leve
 
 ## Top-Level Directories
 
-1. The `./inst` directory is a standard naming convention following _R_ packaging and
-therein, it holds material that will placed into the installation tree of the package but strictly does not contain the code or documentation of the package itself. The `./inst/www` directory contains graphic material to enhance the home page of the package. The `./inst/doc` directory is very important because is contains the steps used to build the NWIS time-zone tables that are used by the installed package, and more details are provided in `./inst/doc/README.md`. The `./.Rbuildignore` file does not emplace the `./inst/www` at package installation.
+1. The `./inst/` directory is a standard naming convention following _R_ packaging and
+therein, it holds material that will be placed into the installation tree of the package but strictly does not contain the code or documentation of the package itself. The `./inst/www/` directory contains graphic material to enhance the home page of the package. The `./inst/doc/` directory is very important because it contains the steps used to build the NWIS time-zone tables that are used by the installed package. More details are provided in `./inst/doc/README.md`. The `./.Rbuildignore` file does not emplace the `./inst/www/` at package installation.
 
 3. The `./man` directory standard R-documentation formatted files (`.Rd`) that are needed for CRAN-compliant package checking, installation, and user manual building.
 
@@ -132,7 +139,7 @@ software. The `./.Rbuildignore` file does not emplace the file at package instal
 
 8. The `SUMMARY.txt` file is a short abstract concerning the repository itself. The authors have a need, as part of the review and publication process, to report a formal abstract on the information product, and this summary serves that purpose. The `./.Rbuildignore` file does not emplace the file at package installation.
 
-## Required Files for a Source Code Reposistory to be an _R_ Package
+## Required Files for a Source Code Repository to be an _R_ Package
 
 9. The `DESCRIPTION` is a required _R_ package description of the package declaring the basic information, required dependencies, need for compiling, and other details.
 
@@ -143,6 +150,6 @@ software. The `./.Rbuildignore` file does not emplace the file at package instal
 
 # REFERENCES
 
-R Development Core Team, 2019, R---A language and environment for statistical computing, R Foundation for Statistical Computing, Vienna, Austria, version 3.6.1, accessed on October 1, 2019, at https://www.R-project.org.
+R Development Core Team, 2020, R---A language and environment for statistical computing, R Foundation for Statistical Computing, Vienna, Austria, version 3.6.3, accessed on March 10, 2020, at https://www.R-project.org.
 
 U.S. Geological Survey, 2019, USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed August 9, 2019, at https://doi.org/10.5066/F7P55KJN.

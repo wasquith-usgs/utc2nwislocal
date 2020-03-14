@@ -1,8 +1,8 @@
 SUMMARY (./utc2nwislocal/SUMMARY.txt)
 
-Title: UTC Date-Times to NWIS Local Time-Zones using UTC Offsets
+Title: UTC Date-Times to NWIS Local Time Zones using UTC Offsets
 
-The utc2nwislocal package in the R language provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offset for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS). The time zones are tracked in a separate database slot than the UTC date-time. Sometimes it can be difficult to force the R language to work with time zones in ways that some developers might desire. This package can help users working with some NWIS data sets.
+The utc2nwislocal package in the R language provides a light-weight, dependency-free utility for converting Coordinated Universal Time (UTC) `base::as.POSIXct()` date-time values into character-string representations for time zones. The UTC offsets for individual time zones are determined from the time-zone codes recognized by the U.S. Geological Survey National Water Information System (NWIS) database. The time zones are tracked in a separate database slot than the UTC date-time. Sometimes it can be difficult in the R language to work with its Olson time-zone naming convention (`base:OlsonNames()`) relative to the time zone codes of NWIS. This package could help users working with some NWIS-derived data sets.
 
 ------------------------------------------------------------------------------------------
 

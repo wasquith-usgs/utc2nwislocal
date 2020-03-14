@@ -12,7 +12,7 @@ nwislocal2utc_offset_hours(tz)
   \item{tz}{A vector of NWIS time-zone codes (such as \code{lev_tz_cd}), and \code{NA} values are assumed to be in UTC with offset of zero;}
 }
 \value{
-The UTC offsets in hours. Any time zone that does not exist in the lookup table (hidden environment [hash table] \code{.NWIStzUTC$TimeZone_Offset}), is set to \code{NA}.
+The UTC offsets in hours. Any time zone that does not exist in the lookup table (the hidden environment [hash table] \code{.NWIStzUTC$TimeZone_Offset}), is set to \code{NA} (see \bold{Examples}).
 }
 \author{ W.H. Asquith}
 \references{
@@ -21,6 +21,7 @@ U.S. Geological Survey, 2019, USGS water data for the Nation: U.S. Geological Su
 \seealso{\code{\link{utc2nwislocal}}, \code{\link{nwislocal2utc_offset_seconds}}}
 \examples{
 nwislocal2utc_offset_hours(c("PST","PDT","the author",NA,"CDT"))
+# Results, in hours, are: [1] -8 -7 NA  0 -5
 
 # Force inspection of lookup table contents, using triple colon notation:
 ls(utc2nwislocal:::.NWIStzUTC$TimeZone_Offset) # keys are time-zone codes

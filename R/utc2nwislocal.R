@@ -83,3 +83,20 @@ function(dt, tz, acy=NA, no.ending.ws=FALSE,
                                       if(is.na(h[1])) return(NA)
                                       h[1] + h[2]/60 })
 }
+
+"utc_offset_hours2nwislocal" <-
+function(hrs, split=FALSE, trace=FALSE) {
+  keys <- sort(ls(.NWIStzUTC$TimeZone_Offset))
+  names <- sapply(hrs, function(t) { tzs <- NULL
+          if(is.na(t)) return(NA)
+          try(for(key in keys) {
+                tz <- get(key, .NWIStzUTC$TimeZone_Offset)
+                if(trace) message(key," = ",tz)
+                if(tz == t) tzs <- c(tzs, key)
+              }, silent=FALSE)
+          if(is.null(tzs)) return(NA)
+          return(paste(tzs, collapse=" and ")) })
+  names(names) <- NULL
+  if(split) return(unlist(strsplit(names, split=" and ")))
+  return(names)
+}

@@ -18,7 +18,7 @@ The UTC offsets in hours. Any time zone that does not exist in the lookup table 
 \references{
 U.S. Geological Survey, 2019, USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed August 9, 2019, at https://doi.org/10.5066/F7P55KJN.
 }
-\seealso{\code{\link{utc2nwislocal}}, \code{\link{nwislocal2utc_offset_seconds}}}
+\seealso{\code{\link{utc2nwislocal}}, \code{\link{utc_offset_hours2nwislocal}}, \cr \code{\link{nwislocal2utc_offset_seconds}}}
 \examples{
 nwislocal2utc_offset_hours(c("PST","PDT","the author",NA,"CDT"))
 # Results, in hours, are: [1] -8 -7 NA  0 -5

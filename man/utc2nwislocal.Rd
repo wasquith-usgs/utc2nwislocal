@@ -50,7 +50,7 @@ The \code{.NWIStzUTC} and these other three are not exported by the \pkg{utc2nwi
     # "TimeZone_Names"   "TimeZone_Offset"   "TimeZone_Offset_seconds"
 
     # The creation of a vector of all time-zone codes
-  all_tz_codes <- ls(NWIStzUTC:::.NWIStzUTC$TimeZone_Names)
+  all_tz_codes <- ls(utc2nwislocal:::.NWIStzUTC$TimeZone_Names)
 
     # Demonstration of access for a given code.
   utc2nwislocal:::.NWIStzUTC$TimeZone_Names$IDLE
@@ -66,7 +66,7 @@ The code, which was used the create the \code{sysdata.rda}, is located in file \
 \references{
 U.S. Geological Survey, 2019, USGS water data for the Nation: U.S. Geological Survey National Water Information System database, accessed August 9, 2019, at https://doi.org/10.5066/F7P55KJN.
 }
-\seealso{\code{\link{nwislocal2utc_offset_hours}}, \code{\link{nwislocal2utc_offset_seconds}}}
+\seealso{\code{\link{nwislocal2utc_offset_hours}}, \code{\link{nwislocal2utc_offset_seconds}}, \cr \code{\link{utc_offset_hours2nwislocal}}}
 \examples{
 # Australia Eastern Standard Time is +10:00 to UTC and NWIS code == "AESST"
 # EST, CDT, and PST are obviously American time zones.

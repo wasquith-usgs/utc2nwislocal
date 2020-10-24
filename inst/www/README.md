@@ -6,7 +6,7 @@
 ***
 ***
 
-This README file describes the contents of the above path. This directory is to contain various files to augment the Internet viewing of the code base as marked up by GitHub, GitLab, or other markup resources. The two files `standard_time_zones_of_the_world.jpg` and `standard_time_zones_of_the_world.pdf` were acquired from the U.S. Central Intelligence Agency (2015). The avatar for the repository (`avatar.png`) was derived from these files.
+This README file describes the contents of the above path. This directory is to contain various files to augment the Internet viewing of the code base as marked up by GitLab or other markup resources. The two files `standard_time_zones_of_the_world.jpg` and `standard_time_zones_of_the_world.pdf` were acquired from the U.S. Central Intelligence Agency (2015). The avatar for the repository (`avatar.png`) was derived from these files.
 
 ## References
 

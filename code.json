@@ -1,0 +1,49 @@
+[
+  {
+    "name": "utc2nwislocal",
+    "organization": "U.S. Geological Survey",
+    "description": "UTC Date-Times to NWIS Local Time-Zone Codes using UTC Offsets",
+    "version": "1.0.1",
+    "status": "Production",
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/water/utc2nwislocal/blob/master/LICENSE.md"
+        }
+      ]
+    },
+
+    "homepageURL": "https://code.usgs.gov/water/utc2nwislocal",
+    "downloadURL": "https://code.usgs.gov/water/utc2nwislocal/-/archive/v1.0.1/utc2nwislocal-v1.0.1.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/utc2nwislocal/blob/master/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/water/utc2nwislocal.git",
+    "vcs": "git",
+
+    "laborHours": 0,
+
+    "tags": [
+      "doi|https://doi.org/10.5066/P9UMT1O2",
+      "UTC",
+      "Coordinated Universal Time",
+      "National Water Information System",
+      "NWIS",
+      "time zone"
+    ],
+
+    "languages": [
+      "R"
+    ],
+
+    "contact": {
+      "name": "William H. Asquith",
+      "email": "wasquith@usgs.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2020-07-16"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+citHeader("To cite utc2nwislocal in publications, please use:")
+
+bibentry(bibtype = "Manual",
+ author = c(person(c("William", "H."), "Asquith",  role=c("aut", "cre")),
+            person(c("Ronald",  "C."), "Seanor",  role=c("aut"))),
+  title = "utc2nwislocal---UTC date-times to NWIS local time zones using UTC offsets",
+  organization = "U.S. Geological Survey",
+  address="Reston, Va.",
+  year = "2020",
+  note = "R package version 1.0.0",
+  url = "https://code.usgs.gov/water/utc2nwislocal",
+  key = "utc2nwislocal-package",
+  textVersion = "Asquith, W.H., and Seanor, R.C., 2020, utc2nwislocal---UTC date-times to NWIS local time zones using UTC offsets: R package, U.S. Geological Survey software release, Reston, Va., https://doi.org/10.5066/P9UMT1O2."
+)
